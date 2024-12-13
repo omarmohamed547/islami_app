@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/ThemeApp.dart';
 import 'package:islami_app/home/home_screen.dart';
 
 void main() {
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeDataApp.darktheme,
       debugShowCheckedModeBanner: false,
       initialRoute: HomeScreen.homeScreenID,
       routes: {HomeScreen.homeScreenID: (context) => HomeScreen()},

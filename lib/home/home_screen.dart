@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/home/tabs/Hadith_tab.dart';
-import 'package:islami_app/home/tabs/Quran_tab.dart';
+import 'package:islami_app/home/tabs/quran_tab/Quran_tab_screen.dart';
 import 'package:islami_app/home/tabs/Radio_tab.dart';
 import 'package:islami_app/home/tabs/Sebha_tab.dart';
 import 'package:islami_app/home/tabs/Time_tab.dart';
@@ -42,30 +42,36 @@ class _HomeScreenState extends State<HomeScreen> {
           height: double.infinity,
         ),
         Scaffold(
-          backgroundColor: Colors.transparent,
-          bottomNavigationBar: BottomNavigationBar(
-              currentIndex: selectedIndex,
-              onTap: (index) {
-                selectedIndex = index;
-                setState(() {});
-              },
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: AppColors.primarycolor,
-              showSelectedLabels: true,
-              showUnselectedLabels: false,
-              items: [
-                BottomNavigationBarItem(
-                    icon: returnIconTab(0, "quran"), label: "Quran"),
-                BottomNavigationBarItem(
-                    icon: returnIconTab(1, "hadeth"), label: "hadeth"),
-                BottomNavigationBarItem(
-                    icon: returnIconTab(2, "sebha"), label: "Sebha"),
-                BottomNavigationBarItem(
-                    icon: returnIconTab(3, "radio-svgrepo-com 1"),
-                    label: "Radio"),
-                BottomNavigationBarItem(
-                    icon: returnIconTab(4, "time"), label: "time")
-              ]),
+          bottomNavigationBar: Theme(
+            data:
+                Theme.of(context).copyWith(canvasColor: AppColors.primarycolor),
+            child: BottomNavigationBar(
+                currentIndex: selectedIndex,
+                onTap: (index) {
+                  selectedIndex = index;
+                  setState(() {});
+                },
+                // type: BottomNavigationBarType.fixed,
+                // backgroundColor: AppColors.primarycolor,
+                showSelectedLabels: true,
+                selectedItemColor: Colors.white,
+                selectedLabelStyle: TextStyle(color: Colors.white),
+                unselectedItemColor: Colors.black,
+                showUnselectedLabels: false,
+                items: [
+                  BottomNavigationBarItem(
+                      icon: returnIconTab(0, "quran"), label: "Quran"),
+                  BottomNavigationBarItem(
+                      icon: returnIconTab(1, "hadeth"), label: "hadeth"),
+                  BottomNavigationBarItem(
+                      icon: returnIconTab(2, "sebha"), label: "Sebha"),
+                  BottomNavigationBarItem(
+                      icon: returnIconTab(3, "radio-svgrepo-com 1"),
+                      label: "Radio"),
+                  BottomNavigationBarItem(
+                      icon: returnIconTab(4, "time"), label: "time")
+                ]),
+          ),
           body: tabs[selectedIndex],
         )
       ],
@@ -80,7 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Color(0x99202020),
               borderRadius: BorderRadius.circular(66),
             ),
-            child: Image.asset("assets/images/$image.png"),
+            child: Image.asset(
+              "assets/images/$image.png",
+              color: Color(0xffFFFFFF),
+            ),
           )
         : Image.asset("assets/images/$image.png");
   }
