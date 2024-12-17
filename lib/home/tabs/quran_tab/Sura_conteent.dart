@@ -32,7 +32,7 @@ class _SuraConteentState extends State<SuraConteent> {
       onTap: widget.onTap,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 22, vertical: 4),
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: containerColor,
             borderRadius: BorderRadius.circular(15),

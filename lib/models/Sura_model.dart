@@ -351,19 +351,20 @@ class SuraModel {
   String suraArabicName;
   String suraEnglishName;
   String numOfVerse;
-  int index;
-
+  //int index;
+  String fileName;
+  static List<SuraModel> suraList = [];
   SuraModel(
-      {required this.index,
+      {required this.fileName,
       required this.numOfVerse,
       required this.suraArabicName,
       required this.suraEnglishName});
 
-  static SuraModel getsuramodelobj(int index) {
+  /* static SuraModel getsuramodelobj(int index) {
     return SuraModel(
         index: index,
         numOfVerse: AyaNumber[index],
         suraArabicName: arabicAuranSuras[index],
         suraEnglishName: englishQuranSurahs[index]);
-  }
+  }*/
 }

@@ -20,7 +20,7 @@ class _QuranDetailsState extends State<QuranDetails> {
   Widget build(BuildContext context) {
     var arg = ModalRoute.of(context)?.settings.arguments as SuraModel;
     if (verses.isEmpty) {
-      loadSuraFile(arg.index);
+      loadSuraFile(arg.fileName);
     }
     return Scaffold(
       appBar: AppBar(
@@ -50,9 +50,15 @@ class _QuranDetailsState extends State<QuranDetails> {
                 arg.suraArabicName,
                 style: TextStyle(color: AppColors.primarycolor, fontSize: 24),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Expanded(
                 child: verses.isEmpty
-                    ? CircularProgressIndicator()
+                    ? Center(
+                        child: CircularProgressIndicator(
+                        color: AppColors.primarycolor,
+                      ))
                     : ListView.builder(
                         itemCount: verses.length,
                         itemBuilder: (context, index) {
@@ -75,9 +81,9 @@ class _QuranDetailsState extends State<QuranDetails> {
     );
   }
 
-  void loadSuraFile(int index) async {
+  void loadSuraFile(String fileName) async {
     String suraContent =
-        await rootBundle.loadString("assets/files/Suras/${index + 1}.txt");
+        await rootBundle.loadString("assets/files/Suras/$fileName");
     List<String> suraLines = suraContent.split('\n');
     for (int i = 0; i < suraLines.length; i++) {
       print(suraLines[i]);

@@ -42,14 +42,14 @@ class HadithDetails extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
-                    //  itemCount: verses.length,
+                    itemCount: arg.content.length,
                     itemBuilder: (context, index) {
-                  return Text(
-                    arg.content[index],
-                    style:
-                        TextStyle(color: AppColors.primarycolor, fontSize: 24),
-                  );
-                }),
+                      return Text(
+                        arg.content[index],
+                        style: TextStyle(
+                            color: AppColors.primarycolor, fontSize: 24),
+                      );
+                    }),
               )
             ],
           )

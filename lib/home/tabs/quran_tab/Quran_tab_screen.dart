@@ -1,13 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/app_colors.dart';
 import 'package:islami_app/home/tabs/quran_tab/Quran_details.dart';
+import 'package:islami_app/home/tabs/quran_tab/most_recently_item.dart';
 import 'package:islami_app/models/Sura_model.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Sura_Item.dart';
 import 'Sura_list_Item.dart';
 
-class QuranTab extends StatelessWidget {
+class QuranTab extends StatefulWidget {
   QuranTab({super.key});
+
+  @override
+  State<QuranTab> createState() => _QuranTabState();
+}
+
+class _QuranTabState extends State<QuranTab> {
+  void add() {
+    for (int i = 0; i < 114; i++) {
+      SuraModel.suraList.add(SuraModel(
+          fileName: "${i + 1}.txt",
+          numOfVerse: SuraModel.AyaNumber[i],
+          suraArabicName: SuraModel.arabicAuranSuras[i],
+          suraEnglishName: SuraModel.englishQuranSurahs[i]));
+    }
+  }
+
+  String searchText = '';
+  Map<String, dynamic> lastSuraMap = {};
+  List<SuraModel> filterList = SuraModel.suraList;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    add();
+    WidgetsFlutterBinding.ensureInitialized();
+
+    loadLastSura();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +47,17 @@ class QuranTab extends StatelessWidget {
         children: [
           Image.asset("assets/images/appQuranTabimage.png"),
           TextField(
+            style: TextStyle(color: Colors.white),
+            onChanged: (value) {
+              searchText = value;
+              filterList = SuraModel.suraList.where((sura) {
+                return sura.suraArabicName.contains(searchText) ||
+                    sura.suraEnglishName
+                        .toLowerCase()
+                        .contains(value.toLowerCase());
+              }).toList();
+              setState(() {});
+            },
             decoration: InputDecoration(
                 prefixIcon:
                     Image.asset("assets/images/quran-svgrepo-com 1.png"),
@@ -34,15 +74,14 @@ class QuranTab extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
-          Text(
-            "Most Recently",
-            style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          SuraItem(),
+          searchText.isEmpty
+              ? MostRecentlyItem(
+                  suraArName: lastSuraMap["suraArName"] ?? "",
+                  suraENName: lastSuraMap["suraEnName"] ?? "",
+                  numOfVerses: lastSuraMap["numOfVerses"] ?? "noo",
+                  filterList: filterList[lastSuraMap["index"] ?? 0],
+                )
+              : SizedBox.shrink(),
           SizedBox(
             height: 15,
           ),
@@ -56,16 +95,25 @@ class QuranTab extends StatelessWidget {
           ),
           Expanded(
             child: ListView.separated(
-              itemCount: SuraModel.AyaNumber.length,
+              itemCount: filterList.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
+                    saveLastSura(
+                        suraArName: filterList[index].suraArabicName,
+                        suraEnName: filterList[index].suraEnglishName,
+                        numOfVerses: filterList[index].numOfVerse,
+                        index: index);
+                    /* Future.delayed(Duration(seconds: 2), () async {
+                      await loadLastSura();
+                    });*/
                     Navigator.pushNamed(
                         context, QuranDetails.qurandetailsScreenId,
-                        arguments: SuraModel.getsuramodelobj(index));
+                        arguments: filterList[index]);
                   },
                   child: SuraListItem(
-                    suraModelobj: SuraModel.getsuramodelobj(index),
+                    index: index,
+                    suraModelobj: filterList[index],
                   ),
                 );
               },
@@ -82,5 +130,34 @@ class QuranTab extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> saveLastSura(
+      {required String suraArName,
+      required String suraEnName,
+      required String numOfVerses,
+      required int index}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('suraArName', suraArName);
+    await prefs.setString('suraEnName', suraEnName);
+    await prefs.setString('numOfVerses', numOfVerses);
+    await prefs.setInt('index', index);
+
+    await loadLastSura();
+  }
+
+  Future<Map<String, dynamic>> getLastSura() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return {
+      "suraArName": prefs.getString("suraArName") ?? "",
+      "suraEnName": prefs.getString("suraEnName") ?? "",
+      "numOfVerses": prefs.getString("numOfVerses") ?? "",
+      "index": prefs.getInt("index") ?? 0,
+    };
+  }
+
+  loadLastSura() async {
+    lastSuraMap = await getLastSura();
+    setState(() {});
   }
 }
