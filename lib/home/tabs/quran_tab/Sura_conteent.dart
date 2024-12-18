@@ -42,7 +42,7 @@ class _SuraConteentState extends State<SuraConteent> {
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.center,
           "${widget.content}[${widget.index + 1}]",
-          style: AppStyle.bold20Primary,
+          style: AppStyle.bold20Primary.copyWith(color: textColor),
         ),
       ),
     );

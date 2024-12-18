@@ -20,6 +20,7 @@ class _QuranDetailsState extends State<QuranDetails> {
   @override
   Widget build(BuildContext context) {
     var arg = ModalRoute.of(context)?.settings.arguments as SuraModel;
+
     if (verses.isEmpty) {
       loadSuraFile(arg.fileName);
     }
