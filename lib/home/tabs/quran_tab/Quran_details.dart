@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami_app/app_colors.dart';
+import 'package:islami_app/utilis/app_colors.dart';
 import 'package:islami_app/home/tabs/quran_tab/Sura_conteent.dart';
 import 'package:islami_app/models/Sura_model.dart';
+import 'package:islami_app/utilis/app_style.dart';
 
 class QuranDetails extends StatefulWidget {
   static const String qurandetailsScreenId = "QuranDetails";
@@ -48,7 +49,7 @@ class _QuranDetailsState extends State<QuranDetails> {
               ),
               Text(
                 arg.suraArabicName,
-                style: TextStyle(color: AppColors.primarycolor, fontSize: 24),
+                style: AppStyle.bold20Primary.copyWith(fontSize: 24),
               ),
               SizedBox(
                 height: 10,

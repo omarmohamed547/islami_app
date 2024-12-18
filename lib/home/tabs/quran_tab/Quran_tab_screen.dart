@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/app_colors.dart';
+import 'package:islami_app/utilis/app_colors.dart';
 import 'package:islami_app/home/tabs/quran_tab/Quran_details.dart';
 import 'package:islami_app/home/tabs/quran_tab/most_recently_item.dart';
 import 'package:islami_app/models/Sura_model.dart';
+import 'package:islami_app/utilis/app_style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Sura_Item.dart';
 import 'Sura_list_Item.dart';
@@ -62,10 +63,7 @@ class _QuranTabState extends State<QuranTab> {
                 prefixIcon:
                     Image.asset("assets/images/quran-svgrepo-com 1.png"),
                 hintText: "Sura Name",
-                hintStyle: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                hintStyle: AppStyle.bold20White.copyWith(fontSize: 16),
                 enabledBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: AppColors.primarycolor, width: 1),
@@ -87,8 +85,7 @@ class _QuranTabState extends State<QuranTab> {
           ),
           Text(
             "Sura List",
-            style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+            style: AppStyle.bold20White.copyWith(fontSize: 16),
           ),
           SizedBox(
             height: 10,

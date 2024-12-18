@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/app_colors.dart';
+import 'package:islami_app/utilis/app_colors.dart';
 import 'package:islami_app/home/tabs/Hadith_tab/Hadith_tab.dart';
 import 'package:islami_app/home/tabs/quran_tab/Quran_tab_screen.dart';
 import 'package:islami_app/home/tabs/radio_tab/Radio_tab.dart';
@@ -33,6 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+
     return Stack(
       children: [
         Image.asset(
@@ -60,16 +62,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 showUnselectedLabels: false,
                 items: [
                   BottomNavigationBarItem(
-                      icon: returnIconTab(0, "quran"), label: "Quran"),
+                      icon: returnIconTab(0, "quran", height), label: "Quran"),
                   BottomNavigationBarItem(
-                      icon: returnIconTab(1, "hadeth"), label: "hadeth"),
+                      icon: returnIconTab(1, "hadeth", height),
+                      label: "hadeth"),
                   BottomNavigationBarItem(
-                      icon: returnIconTab(2, "sebha"), label: "Sebha"),
+                      icon: returnIconTab(2, "sebha", height), label: "Sebha"),
                   BottomNavigationBarItem(
-                      icon: returnIconTab(3, "radio-svgrepo-com 1"),
+                      icon: returnIconTab(3, "radio-svgrepo-com 1", height),
                       label: "Radio"),
                   BottomNavigationBarItem(
-                      icon: returnIconTab(4, "time"), label: "time")
+                      icon: returnIconTab(4, "time", height), label: "time")
                 ]),
           ),
           body: tabs[selectedIndex],
@@ -78,9 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget returnIconTab(int index, String image) {
+  Widget returnIconTab(int index, String image, double height) {
     return selectedIndex == index
         ? Container(
+            height: height * 0.036,
             padding: EdgeInsets.symmetric(vertical: 6, horizontal: 20),
             decoration: BoxDecoration(
               color: Color(0x99202020),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/ThemeApp.dart';
+import 'package:islami_app/utilis/ThemeApp.dart';
 import 'package:islami_app/home/home_screen.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'home/tabs/Hadith_tab/Hadith_details.dart';
 import 'home/tabs/quran_tab/Quran_details.dart';
 

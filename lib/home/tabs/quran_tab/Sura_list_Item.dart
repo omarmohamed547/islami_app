@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/models/Sura_model.dart';
+import 'package:islami_app/utilis/app_style.dart';
 
 class SuraListItem extends StatelessWidget {
   int index;
@@ -20,10 +21,7 @@ class SuraListItem extends StatelessWidget {
             Image.asset("assets/images/GroupsuranNum.png"),
             Text(
               "${index + 1}",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
+              style: AppStyle.bold20White,
             )
           ],
         ),
@@ -36,28 +34,17 @@ class SuraListItem extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Text(
-                    "${suraModelobj.suraEnglishName}",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  Text("${suraModelobj.suraEnglishName}",
+                      style: AppStyle.bold20White),
                   Text(
                     "${suraModelobj.numOfVerse} Verses",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold),
+                    style: AppStyle.bold20White,
                   ),
                 ],
               ),
               Text(
                 "${suraModelobj.suraArabicName}",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                style: AppStyle.bold20White,
               ),
             ],
           ),

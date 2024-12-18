@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami_app/app_colors.dart';
+import 'package:islami_app/utilis/app_colors.dart';
 import 'package:islami_app/models/Hadith_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:islami_app/utilis/app_style.dart';
 
 import 'Hadith_details.dart';
 
@@ -18,6 +19,8 @@ class _HadithTabState extends State<HadithTab> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+
     if (hadithList.isEmpty) {
       loadHadithFile();
     }
@@ -27,7 +30,7 @@ class _HadithTabState extends State<HadithTab> {
         Image.asset("assets/images/Logohadith.png"),
         CarouselSlider.builder(
           options: CarouselOptions(
-              height: 500.0,
+              height: height * 0.66,
               viewportFraction: 0.75,
               initialPage: 0,
               enlargeCenterPage: true,
@@ -57,16 +60,18 @@ class _HadithTabState extends State<HadithTab> {
                       ))
                     : Column(
                         children: [
-                          Text(
-                            hadithList[itemIndex].title,
-                            style: TextStyle(
-                                fontSize: 24, fontWeight: FontWeight.bold),
+                          SizedBox(
+                            height: height * 0.045,
+                          ),
+                          Text(hadithList[itemIndex].title,
+                              style: AppStyle.bold24Black),
+                          SizedBox(
+                            height: height * 0.010,
                           ),
                           Expanded(
                               child: Text(
                             hadithList[itemIndex].content.join(''),
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: AppStyle.bold24Black.copyWith(fontSize: 16),
                           )),
                         ],
                       )),

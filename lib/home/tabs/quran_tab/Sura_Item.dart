@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/app_colors.dart';
+import 'package:islami_app/utilis/app_colors.dart';
 import 'package:islami_app/home/tabs/quran_tab/Quran_details.dart';
 import 'package:islami_app/models/Sura_model.dart';
+import 'package:islami_app/utilis/app_style.dart';
 
 class SuraItem extends StatelessWidget {
   String suraArName;
@@ -18,12 +19,17 @@ class SuraItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, QuranDetails.qurandetailsScreenId,
             arguments: filterList);
       },
       child: Container(
+        height: height * 0.17,
+        //width: width * .65,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: AppColors.primarycolor),
@@ -31,27 +37,19 @@ class SuraItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
                   suraENName,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                  style: AppStyle.bold24Black,
                 ),
                 Text(
                   suraArName,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                  style: AppStyle.bold24Black,
                 ),
                 Text(
-                  numOfVerses,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
+                  "$numOfVerses Verses",
+                  style: AppStyle.bold24Black.copyWith(fontSize: 14),
                 ),
               ],
             ),

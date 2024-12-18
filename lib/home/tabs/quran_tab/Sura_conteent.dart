@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/app_colors.dart';
+import 'package:islami_app/utilis/app_colors.dart';
+import 'package:islami_app/utilis/app_style.dart';
 
 class SuraConteent extends StatefulWidget {
   String content;
@@ -41,7 +42,7 @@ class _SuraConteentState extends State<SuraConteent> {
           textDirection: TextDirection.rtl,
           textAlign: TextAlign.center,
           "${widget.content}[${widget.index + 1}]",
-          style: TextStyle(fontSize: textSize, color: textColor),
+          style: AppStyle.bold20Primary,
         ),
       ),
     );

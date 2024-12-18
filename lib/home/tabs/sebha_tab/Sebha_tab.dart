@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:islami_app/utilis/app_style.dart';
 
 class SebhaTab extends StatefulWidget {
   SebhaTab({super.key});
@@ -15,19 +16,16 @@ class _SebhaTabState extends State<SebhaTab> {
   double rotaion = 0;
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Image.asset("assets/images/Logohadith.png"),
           Center(
-            child: Text(
-              "سَبِّحِ اسْمَ رَبِّكَ الأعلى ",
-              style: TextStyle(
-                  fontSize: 36,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
+            child: Text("سَبِّحِ اسْمَ رَبِّكَ الأعلى ",
+                style: AppStyle.bold36White),
           ),
           AnimatedContainer(
             duration: Duration(milliseconds: 500),
@@ -46,32 +44,26 @@ class _SebhaTabState extends State<SebhaTab> {
                 }
                 setState(() {});
               },
-              child: Stack(alignment: Alignment.center, children: [
-                Transform.rotate(
-                    angle: rotaion,
-                    child: Image.asset("assets/images/sebhaBodyGroub.png")),
-                Column(
-                  children: [
-                    Text(
-                      zekr,
-                      style: TextStyle(
-                          fontSize: 36,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "$count",
-                      style: TextStyle(
-                          fontSize: 36,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-              ]),
+              child: Container(
+                height: height * 0.49,
+                child: Stack(alignment: Alignment.center, children: [
+                  Transform.rotate(
+                      angle: rotaion,
+                      child: Image.asset("assets/images/sebhaBodyGroub.png")),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: height * 0.14,
+                      ),
+                      Text(zekr, style: AppStyle.bold36White),
+                      SizedBox(
+                        height: height * 0.081,
+                      ),
+                      Text("$count", style: AppStyle.bold36White)
+                    ],
+                  ),
+                ]),
+              ),
             ),
           )
         ],

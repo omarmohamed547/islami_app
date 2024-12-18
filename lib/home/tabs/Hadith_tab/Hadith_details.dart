@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/models/Hadith_model.dart';
+import 'package:islami_app/utilis/app_style.dart';
 
-import '../../../app_colors.dart';
+import '../../../utilis/app_colors.dart';
 
 class HadithDetails extends StatelessWidget {
   static const String hadithdetailsScreenId = "HadithDetails";
@@ -11,7 +12,7 @@ class HadithDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var arg = ModalRoute.of(context)?.settings.arguments as HadithModel;
-
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -34,11 +35,14 @@ class HadithDetails extends StatelessWidget {
           Column(
             children: [
               SizedBox(
-                height: 24,
+                height: height * 0.018,
               ),
               Text(
                 arg.title,
-                style: TextStyle(color: AppColors.primarycolor, fontSize: 24),
+                style: AppStyle.bold20Primary.copyWith(fontSize: 24),
+              ),
+              SizedBox(
+                height: height * 0.042,
               ),
               Expanded(
                 child: ListView.builder(
@@ -46,8 +50,7 @@ class HadithDetails extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Text(
                         arg.content[index],
-                        style: TextStyle(
-                            color: AppColors.primarycolor, fontSize: 24),
+                        style: AppStyle.bold20Primary,
                       );
                     }),
               )

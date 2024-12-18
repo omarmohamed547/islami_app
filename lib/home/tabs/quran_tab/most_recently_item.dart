@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/home/tabs/quran_tab/Sura_Item.dart';
 import 'package:islami_app/models/Sura_model.dart';
+import 'package:islami_app/utilis/app_style.dart';
 
 class MostRecentlyItem extends StatelessWidget {
   String suraArName;
@@ -22,8 +23,7 @@ class MostRecentlyItem extends StatelessWidget {
       children: [
         Text(
           "Most Recently",
-          style: TextStyle(
-              color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          style: AppStyle.bold20White.copyWith(fontSize: 16),
         ),
         SizedBox(
           height: 15,
