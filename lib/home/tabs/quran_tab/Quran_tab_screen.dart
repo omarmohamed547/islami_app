@@ -97,11 +97,13 @@ class _QuranTabState extends State<QuranTab> {
                 return InkWell(
                   onTap: () {
                     saveLastSura(
-                        fileName: filterList[index].fileName,
+                        // fileName: filterList[index].fileName,
                         suraArName: filterList[index].suraArabicName,
                         suraEnName: filterList[index].suraEnglishName,
                         numOfVerses: filterList[index].numOfVerse,
-                        index: index);
+                        index:
+                            (SuraModel.reurnIndexFileName(filterList[index])) -
+                                1);
                     /* Future.delayed(Duration(seconds: 2), () async {
                       await loadLastSura();
                     });*/
@@ -133,7 +135,7 @@ class _QuranTabState extends State<QuranTab> {
   Future<void> saveLastSura(
       {required String suraArName,
       required String suraEnName,
-      required String fileName,
+      // required String fileName,
       required String numOfVerses,
       required int index}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -151,7 +153,7 @@ class _QuranTabState extends State<QuranTab> {
       "suraArName": prefs.getString("suraArName") ?? "",
       "suraEnName": prefs.getString("suraEnName") ?? "",
       "numOfVerses": prefs.getString("numOfVerses") ?? "",
-      "fileName": prefs.getString("fileName") ?? "",
+      // "fileName": prefs.getString("fileName") ?? "",
       "index": prefs.getInt("index") ?? 0,
     };
   }

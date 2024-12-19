@@ -354,6 +354,11 @@ class SuraModel {
   //int index;
   String fileName;
   static List<SuraModel> suraList = [];
+
+  static int reurnIndexFileName(SuraModel sura) {
+    return int.parse(sura.fileName.substring(0, sura.fileName.indexOf('.')));
+  }
+
   SuraModel(
       {required this.fileName,
       required this.numOfVerse,
